@@ -81,7 +81,7 @@ export class LocalstorageService implements Storage {
    * @param value - The value to set.
    * @param isJson - Indicates if the value should be stored as JSON.
    */
-  setItem(key: string, value: string, isJson: boolean = false): void {
+  setItem(key: string, value: any, isJson: boolean = false): void {
     if (isJson) {
       value = JSON.stringify(value);
     }

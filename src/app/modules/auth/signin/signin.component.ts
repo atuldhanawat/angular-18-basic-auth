@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalstorageService } from '../../../services/storage/storage.service';
+import { LoginRequest } from '../../../shared/models/request/login';
+import { LoginResponse } from '../../../shared/models/response/login';
 
 @Component({
   selector: 'app-signin', // Selector to use this component in templates
@@ -46,7 +48,11 @@ export class SigninComponent {
    */
   handleSubmit() {
     if (this.authForm.valid) {
-      this.authService.login(this.authForm.value).subscribe((res) => {
+      const loginRequest: LoginRequest = {
+        username: this.authForm.value.username!,
+        password: this.authForm.value.password!
+      };
+      this.authService.login(loginRequest).subscribe((res:LoginResponse) => {
         this.localstorageService.setItem('auth_data', res,true);
         this.router.navigateByUrl('/home');
       });

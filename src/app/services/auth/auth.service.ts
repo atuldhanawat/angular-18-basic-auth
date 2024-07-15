@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { LocalstorageService } from '../storage/storage.service';
+import { LoginResponse } from '../../shared/models/response/login';
+import { LoginRequest } from '../../shared/models/request/login';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +28,8 @@ export class AuthService {
    * @param data - The login data (username and password)
    * @returns {Observable<any>} - Observable of the HTTP response
    */
-  login(data: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/auth/login`, data);
+  login(data: LoginRequest): Observable<LoginResponse>  {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, data);
   }
 
   /**
